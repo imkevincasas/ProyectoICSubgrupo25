@@ -1,0 +1,9 @@
+docker pull mysql:latest
+docker images
+docker network create conetorsql-network
+docker run -d --name mysql-contenedor -v mysql-data:/var/lib/mysql --network conetorsql-network -e "MYSQL_ROOT_PASSWORD=203255" mysql:latest
+docker exec -it mysql-contenedor bash
+docker ps
+
+docker pull phpmyadmin/phpmyadmin
+docker run -d --name phpmyadmin-contenedor -p 8080:80 --network conetorsql-network -e PMA_HOST=mysql-contenedor phpmyadmin/phpmyadmin
